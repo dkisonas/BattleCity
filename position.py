@@ -3,6 +3,9 @@ class Position:
 		self.x = x
 		self.y = y
 
+	def __eq__(self, other_pos):
+		return self.x == other_pos.x and self.y == other_pos.y
+
 	def at(self, x, y):
 		return self.x == x and self.y == y
 

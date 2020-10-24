@@ -93,14 +93,14 @@ class GameMap:
              1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         ]
 
-    def get_game_map(self):
-        return self.game_map
-
-    def is_empty_space(self, x=None, y=None, pos=None):
-        if pos is None:
+    def is_empty_space(self, x=None, y=None, pos_list=None):
+        if pos_list is None:
             return self.game_map[y][x] == 0
         else:
-            return self.game_map[pos.y][pos.x] == 0
+            for pos in pos_list:
+                if self.is_wall(pos.x, pos.y):
+                    return False
+            return True
 
     def is_wall(self, x, y):
         return self.game_map[y][x] == 1
