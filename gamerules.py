@@ -20,53 +20,37 @@ class GameRules:
         controls[input()]()
 
     def move_left(self):
-        pos_list = []
-        for pos in self.game_level.tank.positions:
-            pos_list.append(pos.left())
-        if self.game_level.game_map.is_empty_space(pos_list=pos_list):
-            self.game_level.tank.core = self.game_level.tank.core.left()
-            self.game_level.tank.positions = pos_list
-            self.game_level.tank.turn_left()
+        if self.game_level.game_map.is_empty_space(pos=self.game_level.player_tank.position.left()):
+            self.game_level.player_tank.position = self.game_level.player_tank.position.left()
+            self.game_level.player_tank.turn_left()
 
     def move_down(self):
-        pos_list = []
-        for pos in self.game_level.tank.positions:
-            pos_list.append(pos.down())
-        if self.game_level.game_map.is_empty_space(pos_list=pos_list):
-            self.game_level.tank.core = self.game_level.tank.core.down()
-            self.game_level.tank.positions = pos_list
-            self.game_level.tank.turn_down()
+        if self.game_level.game_map.is_empty_space(pos=self.game_level.player_tank.position.down()):
+            self.game_level.player_tank.position = self.game_level.player_tank.position.down()
+            self.game_level.player_tank.turn_down()
 
     def move_right(self):
-        pos_list = []
-        for pos in self.game_level.tank.positions:
-            pos_list.append(pos.right())
-        if self.game_level.game_map.is_empty_space(pos_list=pos_list):
-            self.game_level.tank.core = self.game_level.tank.core.right()
-            self.game_level.tank.positions = pos_list
-            self.game_level.tank.turn_right()
+        if self.game_level.game_map.is_empty_space(pos=self.game_level.player_tank.position.right()):
+            self.game_level.player_tank.position = self.game_level.player_tank.position.right()
+            self.game_level.player_tank.turn_right()
 
     def move_up(self):
-        pos_list = []
-        for pos in self.game_level.tank.positions:
-            pos_list.append(pos.up())
-        if self.game_level.game_map.is_empty_space(pos_list=pos_list):
-            self.game_level.tank.core = self.game_level.tank.core.up()
-            self.game_level.tank.positions = pos_list
-            self.game_level.tank.turn_up()
+        if self.game_level.game_map.is_empty_space(pos=self.game_level.player_tank.position.up()):
+            self.game_level.player_tank.position = self.game_level.player_tank.position.up()
+            self.game_level.player_tank.turn_up()
 
     def shoot_projectile(self):
-        if self.game_level.tank.direction == 'l':
-            start_pos = Position(self.game_level.tank.core.x - 2, self.game_level.tank.core.y)
+        if self.game_level.player_tank.direction == 'l':
+            start_pos = Position(self.game_level.player_tank.position.x - 1, self.game_level.player_tank.position.y)
             self.game_level.projectiles.append(Projectile(start_pos, 'l'))
-        if self.game_level.tank.direction == 'r':
-            start_pos = Position(self.game_level.tank.core.x + 2, self.game_level.tank.core.y)
+        if self.game_level.player_tank.direction == 'r':
+            start_pos = Position(self.game_level.player_tank.position.x + 1, self.game_level.player_tank.position.y)
             self.game_level.projectiles.append(Projectile(start_pos, 'r'))
-        if self.game_level.tank.direction == 'd':
-            start_pos = Position(self.game_level.tank.core.x, self.game_level.tank.core.y + 2)
+        if self.game_level.player_tank.direction == 'd':
+            start_pos = Position(self.game_level.player_tank.position.x, self.game_level.player_tank.position.y + 1)
             self.game_level.projectiles.append(Projectile(start_pos, 'd'))
-        if self.game_level.tank.direction == 'u':
-            start_pos = Position(self.game_level.tank.core.x, self.game_level.tank.core.y - 2)
+        if self.game_level.player_tank.direction == 'u':
+            start_pos = Position(self.game_level.player_tank.position.x, self.game_level.player_tank.position.y - 1)
             self.game_level.projectiles.append(Projectile(start_pos, 'u'))
 
     def set_game_over(self):

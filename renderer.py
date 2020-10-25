@@ -5,7 +5,15 @@ from time import sleep
 def render_map(game_level):
     for i, row in enumerate(game_level.game_map.game_map):
         for j, column in enumerate(row):
-            if Position(j, i) in game_level.tank.positions or Position(j, i) == game_level.tank.core:
+            find = False
+            for tank in game_level.enemy_tanks:
+                if tank.position.at(j, i):
+                    print("8", end="", flush=True)
+                    find = True
+                    break
+            if find:
+                continue
+            if game_level.player_tank.position.at(j, i):
                 print("*", end="", flush=True)
             elif game_level.game_map.is_projectile(x=j, y=i):
                 print("@", end="", flush=True)
@@ -21,6 +29,8 @@ def render_projectiles(game_level):
         while not game_level.game_map.is_wall(x=p.position.x, y=p.position.y):
             if game_level.game_map.is_border(x=p.position.x, y=p.position.y):
                 break
+            if game_level.delete_enemy_tank_if_at_position(p.position):
+                break
             temp = game_level.game_map.game_map[p.position.y][p.position.x]
             game_level.game_map.game_map[p.position.y][p.position.x] = 2
             render_map(game_level)
@@ -33,7 +43,7 @@ def render_projectiles(game_level):
                 p.position.y -= 1
             elif p.direction == 'd':
                 p.position.y += 1
-            sleep(0.01)
+            sleep(0.05)
         if game_level.game_map.is_wall(x=p.position.x, y=p.position.y):
             game_level.game_map.game_map[p.position.y][p.position.x] = 0
         game_level.projectiles.remove(p)
