@@ -8,7 +8,6 @@ class GameLevel:
 	def delete_enemy_tank_if_shot(self, projectile_pos):
 		for tank in self.enemy_tanks:
 			if projectile_pos == tank.position:
-				self.player_tank.kill_count += 1
 				self.enemy_tanks.remove(tank)
 				return True
 
@@ -17,3 +16,5 @@ class GameLevel:
 			if pos == tank.position:
 				return True
 
+	def is_player_tank_at_position(self, pos):
+		return pos == self.player_tank.position

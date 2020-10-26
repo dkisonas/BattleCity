@@ -69,9 +69,15 @@ class GameRules:
             start_pos = Position(tank.position.x, tank.position.y - 1)
             self.game_level.projectiles.append(Projectile(start_pos, 'u'))
 
-    def check_kill_count(self):
-        if self.game_level.player_tank.kill_count == 5:
+    def check_if_enemy_tanks_exist(self):
+        if len(self.game_level.enemy_tanks) == 0:
             self.set_game_over()
+
+    def check_player_health(self):
+        print("Health: " + str(self.game_level.player_tank.health))
+        if self.game_level.player_tank.health == 0:
+            self.set_game_over()
+            print("you died")
 
     def move_enemy_tanks(self):
         choices = {0: self.move_left,
@@ -81,6 +87,11 @@ class GameRules:
         for tank in self.game_level.enemy_tanks:
             if random.randint(0, 100) < 60:
                 choices[random.randint(0, 3)](tank)
+
+    def randomly_shoot_projectile(self):
+        for tank in self.game_level.enemy_tanks:
+            if random.randint(0, 100) < 30:
+                self.shoot_projectile(tank)
 
     def set_game_over(self):
         self.game_over = True
