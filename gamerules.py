@@ -25,7 +25,8 @@ class GameRules:
 
     def move_left(self, tank):
         if self.game_level.game_map.is_empty_space(pos=tank.position.left())\
-                and not self.game_level.is_enemy_tank_at_position(tank.position.left()):
+                and not self.game_level.is_enemy_tank_at_position(tank.position.left())\
+                and not self.game_level.player_tank.position == tank.position.right():
             tank.position = tank.position.left()
             tank.turn_left()
         elif self.game_level.is_enemy_tank_at_position(tank.position.left()):
@@ -33,7 +34,8 @@ class GameRules:
 
     def move_down(self, tank):
         if self.game_level.game_map.is_empty_space(pos=tank.position.down())\
-                and not self.game_level.is_enemy_tank_at_position(tank.position.down()):
+                and not self.game_level.is_enemy_tank_at_position(tank.position.down())\
+                and not self.game_level.player_tank.position == tank.position.down():
             tank.position = tank.position.down()
             tank.turn_down()
         elif self.game_level.is_enemy_tank_at_position(tank.position.down()):
@@ -41,7 +43,8 @@ class GameRules:
 
     def move_right(self, tank):
         if self.game_level.game_map.is_empty_space(pos=tank.position.right())\
-                and not self.game_level.is_enemy_tank_at_position(tank.position.right()):
+                and not self.game_level.is_enemy_tank_at_position(tank.position.right())\
+                and not self.game_level.player_tank.position == tank.position.right():
             tank.position = tank.position.right()
             tank.turn_right()
         elif self.game_level.is_enemy_tank_at_position(tank.position.right()):
@@ -49,7 +52,8 @@ class GameRules:
 
     def move_up(self, tank):
         if self.game_level.game_map.is_empty_space(pos=tank.position.up())\
-                and not self.game_level.is_enemy_tank_at_position(tank.position.up()):
+                and not self.game_level.is_enemy_tank_at_position(tank.position.up())\
+                and not self.game_level.player_tank.position == tank.position.up():
             tank.position = tank.position.up()
             tank.turn_up()
         elif self.game_level.is_enemy_tank_at_position(tank.position.up()):
