@@ -20,9 +20,9 @@ class PlayerTank(Tank):
     def __init__(self, pos):
         super().__init__(pos)
         self.health = 10
+        self.kill_count = 0
 
 
 class EnemyTank(Tank):
     def __init__(self, pos):
         super().__init__(pos)
-

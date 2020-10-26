@@ -29,7 +29,7 @@ def render_projectiles(game_level):
         while not game_level.game_map.is_wall(x=p.position.x, y=p.position.y):
             if game_level.game_map.is_border(x=p.position.x, y=p.position.y):
                 break
-            if game_level.delete_enemy_tank_if_at_position(p.position):
+            if game_level.delete_enemy_tank_if_shot(p.position):
                 break
             temp = game_level.game_map.game_map[p.position.y][p.position.x]
             game_level.game_map.game_map[p.position.y][p.position.x] = 2
